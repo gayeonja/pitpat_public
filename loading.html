@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="login.css">
+    <title>pitpat loading</title>
+
+<style>
+    /* For large screens */
+    @media (min-width: 1200px) {
+
+        .vector-rt {
+            content: url(img/Vector-rt.png);
+
+            position: absolute;
+            overflow: hidden;
+            left: 272px;
+            top: 220px;
+            height: 30px;
+            /* size: 50px; */
+            width: 1167px;
+        }
+    }
+
+    /* For medium screens */
+    @media (max-width: 1199px) {
+        .vector-rt {
+            content: url(img/Vector-rt.png);
+
+            position: absolute;
+            overflow: hidden;
+            left: 272px;
+            top: 226px;
+            height: 30px;
+            /* size: 50px; */
+            width: 926px;
+        }
+    }
+
+    /* For small screens */
+    @media (max-width: 768px) {
+        .vector-rt {
+            content: url(img/Vector-rt-sm.png);
+            position: absolute;
+            overflow: hidden;
+            left: 242px;
+            /* size: 70px;
+            width: 496px; */
+            height: auto;
+            width: 496px;
+        }
+    }
+
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+        overflow: hidden;
+
+        background: linear-gradient(187deg, #F99 2.33%, #E29595 46.7%, #FF7575 96.57%);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        color: #FFF;
+    }
+
+    h1 {
+        text-shadow: 0px 2.395px 4.791px rgba(0, 0, 0, 0.25);
+
+        font-family: Helvetica;
+        font-size: 58.16px;
+        font-style: normal;
+        font-weight: 700;
+
+        line-height: 66.88px;
+
+        width: 208.4px;
+        height: 72.698px;
+        flex-shrink: 0;
+
+        letter-spacing: 0em;
+        text-align: left;
+
+        margin-top: 200px;
+        margin-left: 75px;
+
+        position:relative;
+
+        /* padding-bottom: 0; */
+    }
+
+    h2 {
+        flex-shrink: 0;
+
+        text-shadow: 0px 1px 4px rgba(95, 25, 25, 0.88);
+
+        font-family: "Helvetica Neue";
+        font-size: 20.06px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        margin-left: 75px;
+        /* margin-bottom: 343px;  */
+
+        top: -10px;
+
+        position: relative;
+    }
+
+    .header-container {
+        position: static;
+        margin-bottom: 107px;
+
+        left: 45px;
+        bottom: 55px;
+    }
+
+    .vector-lt {
+        position: absolute;
+        /* width: 217px;
+        height:4px; */
+        
+        top: 255px;
+        left: 0px;
+    }
+    .vector-rt {
+        position: absolute;
+        overflow: hidden;
+        left: 272px;
+        top: 216px;
+    }
+
+    /* .center-ellipse {
+        position: static;
+        height: 275px;
+        width: auto;
+        bottom: 100px;
+    } */
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .center-ellipse {
+        animation: pulse 2s infinite;
+    }
+
+    .center-ellipse {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+
+        top: -70px;
+
+        width: 290px;
+        height: auto;
+    }
+
+</style>
+</head>
+
+<body>
+    <div id="container" class="container-fluid col-12">
+        <div class="header-container">
+            <img class="vector-lt" src="img/Vector-lt.png" alt="vector">
+
+            <h1>pit+pat</h1>
+
+            <img class="vector-rt" src="img/Vector-rt-alt.png" alt="vector">
+
+            <h2>don't let <strong>true love</strong> pass you by</h2>            
+        </div> <!--header-contianer-->
+
+        <div class="row">
+            <img class="center-ellipse col-3" src="img/mid-ellipse.png" alt="center ellipse">
+        </div>        
+    </div> <!--container-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

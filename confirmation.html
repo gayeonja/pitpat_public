@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation</title>
+
+    <style>
+        body {
+            background: linear-gradient(180deg, #F79898 0%, #ED7676 59.11%, #E9A0A0 100%);
+            background-repeat: no-repeat;
+            text-align: center;
+            color: white;
+            font-family: helvetica;
+            height: 100vh;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin: 0 auto;
+        }
+        button {
+            margin-top: 280px;
+            background: white;
+            box-shadow: 2px 3px 4px 0px rgba(0, 0, 0, 0.25);
+            text-decoration: none;
+            width: 257px;
+            padding: 11px;
+            border-radius: 20px; 
+            border: 1px solid white;
+            font-size: 15px;
+            color: #ED7676;
+            margin-bottom: 20px;
+        }
+        .one {
+            padding-top: 170px;
+        }
+        .two {
+            padding-top: 50px;
+        }
+        .container {
+            margin: 0 auto;
+        }
+        .gif-container {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            
+        }
+        .gif {
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        button.continue {
+            z-index: 2;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gif-container z-1">
+            <img class="gif" src="img/hearts.gif" alt="Confetti GIF">
+        </div>
+        <h1 class="one">And done!</h1>
+        <h1 class="two">Are you ready <br>to pit+pat?</h1>
+        <button id="button" class="z-3 continue" onclick="takeMeHome()">Take me Home!</button>
+    </div>
+</body>
+<script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref as realRef, set, update, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4x7jZhhe0Ir4NZxVk0U_x0kafu6KIpy0",
+      authDomain: "pitpat-53701.firebaseapp.com",
+      databaseURL: "https://pitpat-53701-default-rtdb.firebaseio.com",
+      projectId: "pitpat-53701",
+      storageBucket: "pitpat-53701.appspot.com",
+      messagingSenderId: "1017317377384",
+      appId: "1:1017317377384:web:d885c082d3026ff27e82dd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app); 
+    const auth = getAuth();
+
+    var uid = null; 
+
+    // check to make sure user is signed in 
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            uid = user.uid;
+            console.log("User logged in"); 
+            console.log(uid); 
+            updateUserData(); 
+        } else {
+            // User is signed out
+            console.log("User not logged in"); 
+            window.location.href = "login.html";
+        }
+    });
+
+    function updateUserData() {
+
+        if (localStorage.getItem('1.1') === null) {
+            window.location.href = "algorithm_questions.html";
+        }
+
+        const q11 = localStorage.getItem('1.1');
+        const q12 = localStorage.getItem('1.2');
+        const q21 = localStorage.getItem('2.1');
+        const q22 = localStorage.getItem('2.2');
+        const q31 = localStorage.getItem('3.1');
+        const q32 = localStorage.getItem('3.2');
+        const q41 = localStorage.getItem('4.1');
+        const q42 = localStorage.getItem('4.2');
+        const q51 = localStorage.getItem('5.1');
+        const q52 = localStorage.getItem('5.2');
+
+        const userData = {
+            q11: q11,
+            q12: q12,
+            q21: q21,
+            q22: q22,
+            q31: q31,
+            q32: q32,
+            q41: q41,
+            q42: q42,
+            q51: q51,
+            q52: q52,
+        };
+
+        const algorithmRef = realRef(database, 'users/' + uid);
+        update(algorithmRef, {algorithm:  userData})
+            .then(() => {
+                console.log("User data saved successfully.");
+            })
+            .catch((error) => {
+                console.error("Error saving user data:", error);
+                alert("Error saving user data. Please try again later.");
+                window.location.href = "algorithm_questions.html";
+            });
+
+    }
+
+    function takeMeHome() {
+        window.location.href = "maps.html"; // change website 
+    }
+
+    // document.getElementById('button').addEventListener('click', getImg); 
+    document.getElementById('button').addEventListener('click', takeMeHome);
+
+</script>
+</html>

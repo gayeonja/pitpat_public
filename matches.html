@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matches</title>
+    <link rel="stylesheet" href="navbar.css">
+    
+    <style>
+        body {
+            font-family: helvetica;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .one {
+            padding-top: 47px;
+            font-size: 21.49px;
+            font-weight: 700;
+            color: #E88;
+        }
+        .two {
+            padding-top: 35px;
+            font-size: 22.78px;
+            font-weight: 700;
+            padding-bottom: 23px;
+        }
+        .header {
+            border-radius: 0px 0px 12px 12px;
+            box-shadow: 0px 0px 9.1px 0px rgba(0, 0, 0, 0.25);
+        }
+        h1 {
+            margin: 0 auto;
+        }
+        .user-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+        p.user-name {
+            padding-top: 10px;
+        }
+        .total-cap {
+            font-size: 25px;
+            font-style: italic;
+            font-weight: 200;
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+        p.total-cap {
+            padding-bottom: 10px;
+        }
+        .box {
+            border: 1px solid black;
+            border-radius: 20px;
+            width: 50%;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        button {
+            width: 257px;
+            padding: 11px;
+            border-radius: 12px;
+            border: 1px solid #E88;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.15px;
+            margin-bottom: 100px;
+            background-color: #E88;
+            box-shadow: 1.625px 2.437px 3.25px 0px rgba(0, 0, 0, 0.25);
+            margin-top: 40px;
+        }
+        .heart {
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="one">pit+pat</h1>
+        <h1 class="two">your matches 🤭</h1>
+    </div>
+   <div id="matches">
+
+    </div>
+    <div class="box">
+        <a href="pitpat.html"><img class="heart" src="img/map_icon.png"></a>
+        <p class="user-name">John P.</p>
+        <p class="total-cap">75%</p>
+    </div>
+    <div>
+        <button id="refresh_matches">refresh matches</button>
+    </div>
+    <div class="navbar">
+        <a href="maps.html">
+            <img src="img/maps.png" alt="Maps">
+        </a>
+        <a href="matches.html">
+            <img src="img/match.png" alt="Matches">
+        </a>
+        <a href="userprofile.html"> <!-- change this link to whatever the final profile page link is -->
+            <img src="img/final_profile.png" alt="Profile">
+         </a>
+    </div>
+</body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref as realRef, set, update, get, child, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4x7jZhhe0Ir4NZxVk0U_x0kafu6KIpy0",
+      authDomain: "pitpat-53701.firebaseapp.com",
+      databaseURL: "https://pitpat-53701-default-rtdb.firebaseio.com",
+      projectId: "pitpat-53701",
+      storageBucket: "pitpat-53701.appspot.com",
+      messagingSenderId: "1017317377384",
+      appId: "1:1017317377384:web:d885c082d3026ff27e82dd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app); 
+    const auth = getAuth();
+
+    var uid = null; 
+    var currUserData = null; 
+
+    // check to make sure user is signed in 
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            uid = user.uid;
+            console.log("User logged in"); 
+            console.log(uid); 
+            getCurrUserData(); 
+        } else {
+            // User is signed out
+            console.log("User not logged in"); 
+            window.location.href = "login.html";
+        }
+    });
+
+    function generateMatches() {
+
+        let usersData = null; 
+        let compatibility = []; 
+
+        let i = 0; 
+
+        const starCountRef = realRef(database, 'users');
+        onValue(starCountRef, (snapshot) => {
+            usersData = snapshot.val();
+            console.log(usersData); 
+            if (usersData !== null) {
+                // YEAAA FOR LOOPPPPP 
+                Object.keys(usersData).forEach(userId => {
+                    const userData = usersData[userId];
+                    console.log(i++); 
+                    console.log(userId, userData); 
+                    if (userId === uid ) {}
+                    else {
+                        // gender check 
+                        var skip = true; 
+                        console.log(currUserData.gender_pref ); 
+                        if ( currUserData.gender_pref === 'non-binary' || currUserData.gender_pref === 'other' ) {
+                            skip = false; 
+                        }   
+                        else if ( currUserData.gender_pref === userData.gender && currUserData.gender === userData.gender_pref ) {
+                            skip = false; 
+                        }
+
+                        if ( !skip ) {
+                            // question 1
+                            var q1_curr_user = currUserData.algorithm.q11; 
+                            var q1_other_user = userData.algorithm.q12; 
+                            var percentage1 = (5.0 - Math.abs(q1_curr_user - q1_other_user)) / 5.0 * 100; 
+                            console.log(percentage1); 
+
+                            // question 2
+                            var q2_curr_user = currUserData.algorithm.q21; 
+                            var q2_other_user = userData.algorithm.q22; 
+                            var percentage2 = (5.0 - Math.abs(q2_curr_user - q2_other_user)) / 5.0 * 100; 
+                            console.log(percentage2); 
+
+                            // question 3
+                            var q3_curr_user = currUserData.algorithm.q31; 
+                            var q3_other_user = userData.algorithm.q32; 
+                            var percentage3 = (5.0 - Math.abs(q3_curr_user - q3_other_user)) / 5.0 * 100; 
+                            console.log(percentage3); 
+
+                            // question 4
+                            var q4_curr_user = currUserData.algorithm.q41; 
+                            var q4_other_user = userData.algorithm.q42; 
+                            var percentage4 = (5.0 - Math.abs(q4_curr_user - q4_other_user)) / 5.0 * 100; 
+                            console.log(percentage4); 
+
+                            // question 5
+                            var q5_curr_user = currUserData.algorithm.q51; 
+                            var q5_other_user = userData.algorithm.q52; 
+                            var percentage5 = (5.0 - Math.abs(q5_curr_user - q5_other_user)) / 5.0 * 100; 
+                            console.log(percentage5); 
+
+                            // overall 
+                            var overall = (percentage1 + percentage2 + percentage3 + percentage4 + percentage5) / 5.0 ; 
+                            console.log(overall); 
+                            compatibility.push([overall, percentage1, percentage2, percentage3, percentage4, percentage5, userId, userData.first_name]);
+                        }
+                        // check if gender preference matches, unless everything
+                            // check if my preference matches with user 
+                            // check if user preference matches with mine 
+                        // calculate all 5 categories + total 
+                        // first number will be used to sort 
+                    }
+                });
+                compatibility.sort((a, b) => b[0] - a[0]);
+                // pushToDatabase(compatibility); 
+                presentCompatibility(compatibility); 
+            }
+            else {
+                console.log("usersData is empty"); 
+            }
+        });
+
+    }
+
+    document.getElementById('refresh_matches').addEventListener('click', generateMatches); 
+
+    function getCurrUserData() {
+        const dbRef = realRef(database);
+        get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log("curr user data"); 
+                console.log(snapshot.val());
+                currUserData = snapshot.val(); 
+            } else {
+                console.log("No data available");
+                window.location.href = "login.html";
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
+    function pushToDatabase(compatibility) {
+        const userData = {compatibility: compatibility}; 
+            update(realRef(database, 'users/' + uid), userData)
+            .then(() => {
+                    console.log("User data saved successfully.");
+                    alert("worked.");
+                })
+                .catch((error) => {
+                    console.error("Error saving user data:", error);
+                    alert("Error saving user data. Please try again later.");
+                });
+    }
+
+    function presentCompatibility(compatibility) {
+        console.log(compatibility); 
+        let tb = document.querySelector("#matches"); 
+        for ( let i = 0; i < compatibility.length; i++ ) {
+            let one_user = document.createElement("div"); 
+            one_user.className = "box"; 
+            let user_p = document.createElement("p"); 
+            user_p.className = "user-name"; 
+            let total_compatibility_p = document.createElement("p"); 
+            total_compatibility_p.className = "total-cap"; 
+
+            let heart = document.createElement("img"); 
+            heart.src = "img/map_icon.png"; 
+            heart.alt = "heart"; 
+            heart.className = "heart"; 
+
+            let user_id = null; 
+            let user_name = null; 
+            let total_compatibility = null; 
+            
+            for ( let j = 0; j < compatibility[0].length; j++ ) {
+                console.log(i + " " + j); 
+                if ( j == 6 ) {
+                    user_id = compatibility[i][j]; 
+                }
+                else if ( j == 7 ) {
+                    user_name = compatibility[i][j]; 
+                }
+                else if ( j == 0 ) {
+                    total_compatibility = compatibility[i][j]; 
+                }
+            }
+            console.log(user_id); 
+
+
+            user_p.innerHTML = user_name; 
+            total_compatibility_p.innerHTML = total_compatibility + "%"; 
+            one_user.appendChild(heart); 
+            one_user.appendChild(user_p); 
+            one_user.appendChild(total_compatibility_p); 
+            tb.appendChild(one_user); 
+        }
+        after(); 
+    }
+
+    function after() {
+        // Get elements by class name
+        var elements = document.getElementsByClassName("heart");
+
+        // Loop through the elements
+        for (var i = 0; i < elements.length; i++) {
+            console.log("here");
+            // Add a click event listener to each element
+            elements[i].addEventListener("click", function() {
+                window.location.href = "pitpat.html";
+            });
+        }
+    }
+
+</script>
+</html>

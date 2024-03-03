@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compatibility Test</title>
+    <style>
+        .selectionButton {
+            display: inline-block;
+            padding: 10px; /* Adjust padding as needed */
+            margin: 5px;
+            background-color: #F9B3B3;
+            border: 1px solid #F9B3B3;
+            border-radius: 4px; 
+            width: 50px; /* Set width and height to the same value */
+            height: 50px;
+            cursor: pointer;
+        }
+        .selectionButton.option1:hover,
+        .selectionButton.option1.selected {
+            border: 1px solid #85B2DB;
+            background-color: #85B2DB;
+        }
+        .selectionButton.option2:hover,
+        .selectionButton.option2.selected {
+            border: 1px solid #85B2DB;
+            background-color: #85B2DB;
+        }
+        .selectionButton.option3:hover,
+        .selectionButton.option3.selected {
+            border: 1px solid #85B2DB;
+            background-color: #85B2DB;
+        }
+        .selectionButton.option4:hover,
+        .selectionButton.option4.selected {
+            border: 1px solid #85B2DB;
+            background-color: #85B2DB;
+        }
+        .selectionButton.option5:hover,
+        .selectionButton.option5.selected {
+            border: 1px solid #85B2DB;
+            background-color: #85B2DB;
+        }
+        h1 {
+            color: white;
+            font-size: 21.87px;
+            font-weight: 700;
+            letter-spacing: 0.22px;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            padding-top: 100px;
+        }
+        body {
+            background: linear-gradient(180deg, #F79898 0%, #ED7676 59.11%, #E9A0A0 100%);
+            background-repeat: no-repeat;
+            text-align: center;
+            font-family: helvetica;
+        }
+        .box {
+            border: 1px solid white;
+            border-radius: 12px;
+            background: white;
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 40px;
+            padding: 15px;
+        }
+
+        .selectionButton.option1 {
+            background-color: #ffe6e6;
+            border: 1px solid #ffe6e6;
+        }
+        .selectionButton.option2 {
+            background-color: #F9D6D6;
+            border: 1px solid #F9D6D6;
+        }
+        .selectionButton.option3 {
+            background-color: #F9B3B3;
+            border: 1px solid #F9B3B3;
+        }
+        .selectionButton.option4 {
+            background-color: #ED9393;
+            border: 1px solid #ED9393;
+        }
+        .selectionButton.option5 {
+            background-color: #DB8585;
+            border: 1px solid #DB8585;
+        }
+        .question {
+            font-size: 12.55px;
+            font-weight: 500;
+        }
+        .sub {
+            font-size: 19px;
+            font-style: italic;
+            font-weight: 300;
+        }
+        button {
+            margin-top: 30px;
+            background: #397cfe;
+            box-shadow: 2px 3px 4px 0px rgba(0, 0, 0, 0.25);
+            text-decoration: none;
+            width: 257px;
+            padding: 11px;
+            border-radius: 20px; 
+            border: 1px solid #397cfe;
+            font-size: 15px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Step 4: Starter Questions</h1>
+        <div class="box">
+            <div id="question_1">
+                <p class="question">Question 1/5</p>
+                <div id="question_1_1">
+                    <p class="sub">Question 1.1: How important is romance in a relationship to you <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup1_1">
+                        <button id="111" class="selectionButton option1" onclick="selectOption1_1(1, 111)">1</button>
+                        <button id="112" class="selectionButton option2" onclick="selectOption1_1(2, 112)">2</button>
+                        <button id="113" class="selectionButton option3" onclick="selectOption1_1(3, 113)">3</button>
+                        <button id="114" class="selectionButton option4" onclick="selectOption1_1(4, 114)">4</button>
+                        <button id="115" class="selectionButton option5" onclick="selectOption1_1(5, 115)">5</button>
+                    </div>
+                </div>
+                <div id="question_1_2">
+                    <p class="sub">Question 1.2: How romantic do you consider yourself to be <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup1_2">
+                        <button id="121" class="selectionButton option1" onclick="selectOption1_2(1, 121)">1</button>
+                        <button id="122" class="selectionButton option2" onclick="selectOption1_2(2, 122)">2</button>
+                        <button id="123" class="selectionButton option3" onclick="selectOption1_2(3, 123)">3</button>
+                        <button id="124" class="selectionButton option4" onclick="selectOption1_2(4, 124)">4</button>
+                        <button id="125" class="selectionButton option5" onclick="selectOption1_2(5, 125)">5</button>
+                    </div>
+                </div>
+            </div>
+            <div id="question_2">
+                <p class="question">Question 2/5</p>
+                <div id="question_2_1">
+                    <p class="sub">Question 2.1: How important is commitment in a relationship to you <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup2_1">
+                        <button id="211" class="selectionButton option1" onclick="selectOption2_1(1, 211)">1</button>
+                        <button id="212" class="selectionButton option2" onclick="selectOption2_1(2, 212)">2</button>
+                        <button id="213" class="selectionButton option3" onclick="selectOption2_1(3, 213)">3</button>
+                        <button id="214" class="selectionButton option4" onclick="selectOption2_1(4, 214)">4</button>
+                        <button id="215" class="selectionButton option5" onclick="selectOption2_1(5, 215)">5</button>
+                    </div>
+                </div>
+                <div id="question_2_2">
+                    <p class="sub">Question 2.2: How would you rate your commitment skills <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup2_2">
+                        <button id="221" class="selectionButton option1" onclick="selectOption2_2(1, 221)">1</button>
+                        <button id="222" class="selectionButton option2" onclick="selectOption2_2(2, 222)">2</button>
+                        <button id="223" class="selectionButton option3" onclick="selectOption2_2(3, 223)">3</button>
+                        <button id="224" class="selectionButton option4" onclick="selectOption2_2(4, 224)">4</button>
+                        <button id="225" class="selectionButton option5" onclick="selectOption2_2(5, 225)">5</button>
+                    </div>
+                </div>
+            </div>
+            <div id="question_3">
+                <p class="question">Question 3/5</p>
+                <div id="question_3_1">
+                    <p class="sub">Question 3.1: How important is financial responsibility to you in a partner <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup3_1">
+                        <button id="311" class="selectionButton option1" onclick="selectOption3_1(1, 311)">1</button>
+                        <button id="312" class="selectionButton option2" onclick="selectOption3_1(2, 312)">2</button>
+                        <button id="313" class="selectionButton option3" onclick="selectOption3_1(3, 313)">3</button>
+                        <button id="314" class="selectionButton option4" onclick="selectOption3_1(4, 314)">4</button>
+                        <button id="315" class="selectionButton option5" onclick="selectOption3_1(5, 315)">5</button>
+                    </div>
+                </div>
+                <div id="question_3_2">
+                    <p class="sub">Question 3.2: How financially responsible do you consider yourself to be <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup3_2">
+                        <button id="321" class="selectionButton option1" onclick="selectOption3_2(1, 321)">1</button>
+                        <button id="322" class="selectionButton option2" onclick="selectOption3_2(2, 322)">2</button>
+                        <button id="323" class="selectionButton option3" onclick="selectOption3_2(3, 323)">3</button>
+                        <button id="324" class="selectionButton option4" onclick="selectOption3_2(4, 324)">4</button>
+                        <button id="325" class="selectionButton option5" onclick="selectOption3_2(5, 325)">5</button>
+                    </div>
+                </div>
+            </div>
+            <div id="question_4">
+                <p class="question">Question 4/5</p>
+                <div id="question_4_1">
+                    <p class="sub">Question 4.1: How important is a sense of humor in a partner to you <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup4_1">
+                        <button id="411" class="selectionButton option1" onclick="selectOption4_1(1, 411)">1</button>
+                        <button id="412" class="selectionButton option2" onclick="selectOption4_1(2, 412)">2</button>
+                        <button id="413" class="selectionButton option3" onclick="selectOption4_1(3, 413)">3</button>
+                        <button id="414" class="selectionButton option4" onclick="selectOption4_1(4, 414)">4</button>
+                        <button id="415" class="selectionButton option5" onclick="selectOption4_1(5, 415)">5</button>
+                    </div>
+                </div>
+                <div id="question_4_2">
+                    <p class="sub">Question 4.2: How would you rate your own sense of humor <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup4_2">
+                        <button id="421" class="selectionButton option1" onclick="selectOption4_2(1, 421)">1</button>
+                        <button id="422" class="selectionButton option2" onclick="selectOption4_2(2, 422)">2</button>
+                        <button id="423" class="selectionButton option3" onclick="selectOption4_2(3, 423)">3</button>
+                        <button id="424" class="selectionButton option4" onclick="selectOption4_2(4, 424)">4</button>
+                        <button id="425" class="selectionButton option5" onclick="selectOption4_2(5, 425)">5</button>
+                    </div>
+                </div>
+            </div>
+            <div id="question_5">
+                <p class="question">Question 5/5</p>
+                <div id="question_5_1">
+                    <p class="sub">Question 5.1: How important is a sense of adventure in a partner to you <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup5_1">
+                        <button id="511" class="selectionButton option1" onclick="selectOption5_1(1, 511)">1</button>
+                        <button id="512" class="selectionButton option2" onclick="selectOption5_1(2, 512)">2</button>
+                        <button id="513" class="selectionButton option3" onclick="selectOption5_1(3, 513)">3</button>
+                        <button id="514" class="selectionButton option4" onclick="selectOption5_1(4, 514)">4</button>
+                        <button id="515" class="selectionButton option5" onclick="selectOption5_1(5, 515)">5</button>
+                    </div>
+                </div>
+                <div id="question_5_2">
+                    <p class="sub">Question 5.2: How adventurous do you consider yourself to be <br>on a scale of 1 through 5? (1=not very, 5=very)</p>
+                    <div id="buttonGroup5_2">
+                        <button id="521" class="selectionButton option1" onclick="selectOption5_2(1, 521)">1</button>
+                        <button id="522" class="selectionButton option2" onclick="selectOption5_2(2, 522)">2</button>
+                        <button id="523" class="selectionButton option3" onclick="selectOption5_2(3, 523)">3</button>
+                        <button id="524" class="selectionButton option4" onclick="selectOption5_2(4, 524)">4</button>
+                        <button id="525" class="selectionButton option5" onclick="selectOption5_2(5, 525)">5</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="submit" onclick="userSubmit()">submit</button>
+    </div>
+</body>
+<script>
+    let selectedOption1_1 = null;
+    let selectedOption1_1_id = null;
+    let selectedOption1_2 = null;
+    let selectedOption1_2_id = null;
+
+    let selectedOption2_1 = null;
+    let selectedOption2_1_id = null;
+    let selectedOption2_2 = null;
+    let selectedOption2_2_id = null;
+
+    let selectedOption3_1 = null;
+    let selectedOption3_1_id = null;
+    let selectedOption3_2 = null;
+    let selectedOption3_2_id = null;
+
+    let selectedOption4_1 = null;
+    let selectedOption4_1_id = null;
+    let selectedOption4_2 = null;
+    let selectedOption4_2_id = null;
+
+    let selectedOption5_1 = null;
+    let selectedOption5_1_id = null;
+    let selectedOption5_2 = null;
+    let selectedOption5_2_id = null;
+
+    function selectOption1_1(option, id) {
+        // Clear previous selection
+        if (selectedOption1_1) {
+            document.getElementById(selectedOption1_1_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption1_1 = option;
+        selectedOption1_1_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function selectOption1_2(option, id) {
+        // Clear previous selection
+        if (selectedOption1_2) {
+            document.getElementById(selectedOption1_2_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption1_2 = option;
+        selectedOption1_2_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function selectOption2_1(option, id) {
+        // Clear previous selection
+        if (selectedOption2_1) {
+            document.getElementById(selectedOption2_1_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption2_1 = option;
+        selectedOption2_1_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function selectOption2_2(option, id) {
+        // Clear previous selection
+        if (selectedOption2_2) {
+            document.getElementById(selectedOption2_2_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption2_2 = option;
+        selectedOption2_2_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function selectOption3_1(option, id) {
+        // Clear previous selection
+        if (selectedOption3_1) {
+            document.getElementById(selectedOption3_1_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption3_1 = option;
+        selectedOption3_1_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function selectOption3_2(option, id) {
+        // Clear previous selection
+        if (selectedOption3_2) {
+            document.getElementById(selectedOption3_2_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption3_2 = option;
+        selectedOption3_2_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function selectOption4_1(option, id) {
+        // Clear previous selection
+        if (selectedOption4_1) {
+            document.getElementById(selectedOption4_1_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption4_1 = option;
+        selectedOption4_1_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function selectOption4_2(option, id) {
+        // Clear previous selection
+        if (selectedOption4_2) {
+            document.getElementById(selectedOption4_2_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption4_2 = option;
+        selectedOption4_2_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function selectOption5_1(option, id) {
+        // Clear previous selection
+        if (selectedOption5_1) {
+            document.getElementById(selectedOption5_1_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption5_1 = option;
+        selectedOption5_1_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function selectOption5_2(option, id) {
+        // Clear previous selection
+        if (selectedOption5_2) {
+            document.getElementById(selectedOption5_2_id).classList.remove('selected');
+        }
+        // Mark the current selection
+        selectedOption5_2 = option;
+        selectedOption5_2_id = id; 
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function userSubmit() {
+        var good_to_go = false; 
+        if ( selectedOption1_1 !== null && selectedOption1_2 !== null ) {
+            if ( selectedOption2_1 !== null && selectedOption2_2 !== null ) {
+                if ( selectedOption3_1 !== null && selectedOption3_2 !== null ) {
+                    if ( selectedOption4_1 !== null && selectedOption4_2 !== null ) {
+                        if ( selectedOption5_1 !== null && selectedOption5_2 !== null ) {
+                            good_to_go = true; 
+                        }
+                    }
+                }
+            }
+        }
+
+        if ( good_to_go ) {
+            localStorage.setItem('1.1', selectedOption1_1);
+            localStorage.setItem('1.2', selectedOption1_2);
+            localStorage.setItem('2.1', selectedOption2_1);
+            localStorage.setItem('2.2', selectedOption2_2);
+            localStorage.setItem('3.1', selectedOption3_1);
+            localStorage.setItem('3.2', selectedOption3_2);
+            localStorage.setItem('4.1', selectedOption4_1);
+            localStorage.setItem('4.2', selectedOption4_2);
+            localStorage.setItem('5.1', selectedOption5_1);
+            localStorage.setItem('5.2', selectedOption5_2);
+            window.location.href = 'confirmation.html';
+        }
+        else {
+            alert("Please select a number for all questions"); 
+        }
+    }
+
+</script>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Profile</title>
+
+    <style>
+        body {
+            margin: 0 auto;
+            text-align: center;
+        }
+        .pink-box {
+            background-image: url('img/box.png');
+            background-size: cover;
+            height: 175px;
+            position: fixed;
+            z-index: 1;
+            width: 100%;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            font-size: 21.87px;
+            font-weight: 700;
+            letter-spacing: 0.22px;
+            padding-top: 48px;
+        }
+        .labelImage{
+            display: inline-block;
+            width: 130px; 
+            height: 130px; 
+            background-image: url('img/profile.png'); 
+            background-size: cover;
+            cursor: pointer; 
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 120px;
+            z-index: 2;
+        }
+        .labelImage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .table {
+            width: 70%;
+            margin: 0 auto;
+        }
+        .self-introduction {
+            text-align: left;
+            width: 70%;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+        #count {
+            float: right;
+        }
+        p {
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 0.11px;
+        }
+        .continue {
+            width: 257px;
+            padding: 11px;
+            border-radius: 20px;
+            border: 1px solid #d1d1d1;
+            color: #767676;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.15px;
+        }
+        .continue2 {
+            width: 257px;
+            padding: 11px;
+            border-radius: 20px;
+            border: 1px solid #397cfe;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.15px;
+            background: #397CFE;
+            box-shadow: 2px 3px 4px 0px rgba(0, 0, 0, 0.25);
+            margin-top: 15px;
+        }
+        a {
+            margin-top: 10px;
+            background: #d1d1d1;
+            box-shadow: 2px 3px 4px 0px rgba(0, 0, 0, 0.25);
+            text-decoration: none;
+        }
+        .box {
+            border: 1px solid black;
+            border-radius: 12px;
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        .text {
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pink-box">
+        <h1>Step 2: Update Profile</h1>
+    </div>
+    <div class="container-fluid">
+        <input 
+            type="file" 
+            class="inputFile" 
+            id="profilepic" 
+            accept="image/png, image/jpeg"
+            style="display: none;"
+        />
+        <label for="profilepic" class="labelImage"></label>
+
+        <div class="box table-responsive-sm">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row">First Name</th>
+                        <td id="first_name" contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Last Name</th>
+                        <td id="last_name" contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Age</th>
+                        <td id="age" contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Gender</th>
+                        <td id="gender" contenteditable="true"></td>
+                    </tr>
+                    <!-- <tr>
+                        <th scope="row">City</th>
+                        <td id="city" contenteditable="true"></td>
+                    </tr> -->
+                </tbody>
+            </table>
+            <form id="signup-form" action="">
+                <div class="form-group">
+                    <div class="mb-3 self-introduction">
+                        <label for="self-introduction" class="form-label">Self-Introduction:</label>
+                        <textarea class="form-control" id="self-introduction" rows="3" placeholder="Write a short self-introduction!"></textarea>
+                        <p><small id="count"></small></p>
+                    </div>
+                </div>
+            </form>
+            <p class="text">This is the profile that will be made available to all <br>your matches! Please double check and make sure <br>all information featured is accurate.</p>
+        </div>
+        <div class="col-12">
+            <button class="continue2" id="save_profile">save profile</button>
+        </div>
+        <div class="col-12">
+            <a href="preferences.html" class="continue" type="button">continue</a>
+        </div>
+    </div>
+</body>
+<script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref as realRef, set, update, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4x7jZhhe0Ir4NZxVk0U_x0kafu6KIpy0",
+      authDomain: "pitpat-53701.firebaseapp.com",
+      databaseURL: "https://pitpat-53701-default-rtdb.firebaseio.com",
+      projectId: "pitpat-53701",
+      storageBucket: "pitpat-53701.appspot.com",
+      messagingSenderId: "1017317377384",
+      appId: "1:1017317377384:web:d885c082d3026ff27e82dd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app); 
+    const auth = getAuth();
+
+    var uid = null; 
+    var userData = null; 
+
+    // check to make sure user is signed in 
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            uid = user.uid;
+            console.log("User logged in"); 
+            console.log(uid); 
+
+            // Grab user information
+            const dbRef = realRef(getDatabase());
+            get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log(snapshot.val());
+                    userData = snapshot.val(); 
+                    getProfilePic(); 
+                    populateUserData(); 
+                } else {
+                    console.log("No data available");
+                    window.location.href = "login.html";
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        } else {
+            // User is signed out
+            console.log("User not logged in"); 
+            window.location.href = "login.html";
+        }
+    });
+
+    function getProfilePic() {
+        const storage = getStorage();
+        const imageName = userData.imageURL; 
+        const imageRef = ref(storage, 'img/' + imageName);
+
+        getDownloadURL(imageRef)
+            .then((url) => {
+                const labelImage = document.querySelector('.labelImage');
+                var url = 'url(' + url + ")"; 
+                labelImage.style.backgroundImage = url;
+            })
+            .catch((error) => {
+                console.error('Error getting download URL:', error);
+        });
+    }
+
+    function populateUserData() {
+        var first_name = userData.first_name; 
+        var last_name = userData.last_name; 
+        var gender = userData.gender; 
+        var age = userData.age; 
+
+        document.getElementById('first_name').innerHTML = first_name;
+        document.getElementById('last_name').innerHTML = last_name;
+        document.getElementById('gender').innerHTML = gender;
+        document.getElementById('age').innerHTML = age;
+    }
+
+    function saveProfile() {
+        var input_first_name = document.getElementById('first_name').innerHTML.trim(); 
+        var input_last_name = document.getElementById('last_name').innerHTML.trim(); 
+        var input_gender = document.getElementById('gender').innerHTML.trim(); 
+        var input_age = document.getElementById('age').innerHTML.trim(); 
+        var input_self_intro = document.getElementById('self-introduction').value.trim(); 
+        
+        if ( input_first_name !== '' && input_last_name !== '' && input_gender !== '' && input_age !== '' && input_self_intro !== '' ) {
+            const userData = {
+                first_name: input_first_name,
+                last_name: input_last_name, 
+                age: input_age,
+                gender: input_gender,
+                self_intro: input_self_intro
+            };
+
+            update(realRef(database, 'users/' + uid), userData)
+                .then(() => {
+                    console.log("User data saved successfully.");
+                    alert("Your profile has been updated."); 
+                })
+                .catch((error) => {
+                    console.error("Error saving user data:", error);
+                    alert("Error saving user data. Please try again later.");
+                });
+        }
+        else {
+            alert("Please make sure all inputs are not empty."); 
+        }
+    }
+
+    document.getElementById('save_profile').addEventListener('click', saveProfile); 
+    
+    // textarea 
+    document.querySelector("#count").innerHTML = document.querySelector("#self-introduction").value.trim().length + `/150`;
+    document.querySelector("#signup-form").onchange = function() {
+        const message = document.querySelector("#self-introduction").value.trim();
+        document.querySelector("#count").innerHTML = message.length + `/150`;
+    }
+
+</script>
+</html>
